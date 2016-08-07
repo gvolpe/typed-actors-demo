@@ -5,9 +5,9 @@ import de.knutwalker.akka.typed._
 import com.gvolpe.typed.examples.actor.SimpleTypedActor._
 
 object SimpleTypedActor {
-  sealed trait MyMessage
-  case class Foo(foo: String) extends MyMessage
-  case class Bar(bar: String) extends MyMessage
+  sealed trait MyMessage extends Product with Serializable
+  final case class Foo(foo: String) extends MyMessage
+  final case class Bar(bar: String) extends MyMessage
 
   def props = Props[MyMessage, SimpleTypedActor]
 }

@@ -4,7 +4,7 @@ import com.gvolpe.typed.examples.actor.StrictTypedActor._
 import de.knutwalker.akka.typed._
 
 object StrictTypedActor {
-  sealed trait StrictMessage
+  sealed trait StrictMessage extends Product with Serializable
   case object StrictOne extends StrictMessage
   case object StrictTwo extends StrictMessage
 

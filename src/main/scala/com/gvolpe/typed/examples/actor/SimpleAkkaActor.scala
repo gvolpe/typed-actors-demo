@@ -4,9 +4,9 @@ import akka.actor.{Actor, Props}
 import com.gvolpe.typed.examples.actor.SimpleAkkaActor.{SimpleMessageOne, SimpleMessageTwo}
 
 object SimpleAkkaActor {
-  sealed trait SimpleMessage
-  case class SimpleMessageOne(v: String) extends SimpleMessage
-  case class SimpleMessageTwo(v: String) extends SimpleMessage
+  sealed trait SimpleMessage extends Product with Serializable
+  final case class SimpleMessageOne(v: String) extends SimpleMessage
+  final case class SimpleMessageTwo(v: String) extends SimpleMessage
 
   def props = Props[SimpleAkkaActor]
 }
