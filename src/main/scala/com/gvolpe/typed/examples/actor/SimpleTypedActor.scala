@@ -1,15 +1,15 @@
-package com.gvolpe.typed.actor
+package com.gvolpe.typed.examples.actor
 
-import akka.actor.{Actor, ActorSystem}
+import akka.actor.Actor
 import de.knutwalker.akka.typed._
-import com.gvolpe.typed.actor.SimpleTypedActor._
+import com.gvolpe.typed.examples.actor.SimpleTypedActor._
 
 object SimpleTypedActor {
   sealed trait MyMessage
   case class Foo(foo: String) extends MyMessage
   case class Bar(bar: String) extends MyMessage
 
-  def props(implicit s: ActorSystem) = ActorOf(Props[MyMessage, SimpleTypedActor], name = "typed-actor")
+  def props = Props[MyMessage, SimpleTypedActor]
 }
 
 class SimpleTypedActor extends Actor {

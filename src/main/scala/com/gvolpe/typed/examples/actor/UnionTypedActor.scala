@@ -1,15 +1,15 @@
-package com.gvolpe.typed.actor
+package com.gvolpe.typed.examples.actor
 
-import akka.actor.{Actor, ActorSystem}
+import akka.actor.Actor
 import de.knutwalker.akka.typed._
-import com.gvolpe.typed.actor.UnionTypedActor._
+import com.gvolpe.typed.examples.actor.UnionTypedActor._
 
 object UnionTypedActor {
   case class SampleOne(n: Int)
   case class SampleTwo(v: String)
   case class SampleThree(b: Boolean)
 
-  def props(implicit s: ActorSystem) = ActorOf(Props[SampleOne, UnionTypedActor]).or[SampleTwo].or[SampleThree]
+  def props = Props[SampleOne, UnionTypedActor].or[SampleTwo].or[SampleThree]
 }
 
 class UnionTypedActor extends Actor {

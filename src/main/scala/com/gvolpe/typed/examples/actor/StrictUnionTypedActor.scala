@@ -1,7 +1,6 @@
-package com.gvolpe.typed.actor
+package com.gvolpe.typed.examples.actor
 
-import akka.actor.ActorSystem
-import com.gvolpe.typed.actor.StrictUnionTypedActor._
+import com.gvolpe.typed.examples.actor.StrictUnionTypedActor._
 import de.knutwalker.akka.typed._
 
 object StrictUnionTypedActor {
@@ -10,7 +9,7 @@ object StrictUnionTypedActor {
   case class Baz()
 
   // Message type derivation using PropsFor (only for typed actor)
-  def props(implicit s: ActorSystem) = ActorOf(PropsFor[StrictUnionTypedActor]).or[Bar].or[Baz]
+  def props = PropsFor[StrictUnionTypedActor]
 }
 
 // NOTE: It doesn't allow case objects as types

@@ -1,7 +1,6 @@
-package com.gvolpe.typed.actor
+package com.gvolpe.typed.examples.actor
 
-import akka.actor.ActorSystem
-import com.gvolpe.typed.actor.StrictTypedActor._
+import com.gvolpe.typed.examples.actor.StrictTypedActor._
 import de.knutwalker.akka.typed._
 
 object StrictTypedActor {
@@ -11,7 +10,7 @@ object StrictTypedActor {
 
   case object NotStrict
 
-  def props(implicit s: ActorSystem) = ActorOf(Props[StrictMessage, StrictTypedActor], name = "StrictTypedActor")
+  def props = Props[StrictMessage, StrictTypedActor]
 }
 
 class StrictTypedActor extends TypedActor.Of[StrictMessage] {

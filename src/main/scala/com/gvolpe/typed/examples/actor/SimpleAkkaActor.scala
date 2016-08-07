@@ -1,14 +1,14 @@
-package com.gvolpe.typed.actor
+package com.gvolpe.typed.examples.actor
 
-import akka.actor.{Actor, ActorSystem, Props}
-import com.gvolpe.typed.actor.SimpleAkkaActor.{SimpleMessageOne, SimpleMessageTwo}
+import akka.actor.{Actor, Props}
+import com.gvolpe.typed.examples.actor.SimpleAkkaActor.{SimpleMessageOne, SimpleMessageTwo}
 
 object SimpleAkkaActor {
   sealed trait SimpleMessage
   case class SimpleMessageOne(v: String) extends SimpleMessage
   case class SimpleMessageTwo(v: String) extends SimpleMessage
 
-  def props(implicit s: ActorSystem) = s.actorOf(Props[SimpleAkkaActor])
+  def props = Props[SimpleAkkaActor]
 }
 
 class SimpleAkkaActor extends Actor {

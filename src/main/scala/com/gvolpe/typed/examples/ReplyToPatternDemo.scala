@@ -1,11 +1,11 @@
-package com.gvolpe.typed
+package com.gvolpe.typed.examples
 
 import akka.actor.ActorSystem
-import com.gvolpe.typed.actor.ReplyToPatternActor
-import de.knutwalker.akka.typed._
+import com.gvolpe.typed.examples.actor.ReplyToPatternActor
+import de.knutwalker.akka.typed.{Typed, _}
 
-import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
+import scala.concurrent.ExecutionContext.Implicits.global
 
 object ReplyToPatternDemo extends App {
 

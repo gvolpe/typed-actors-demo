@@ -1,6 +1,6 @@
-package com.gvolpe.typed.actor
+package com.gvolpe.typed.examples.actor
 
-import com.gvolpe.typed.ReplyToPatternDemo.{MyMessage, MyResponse}
+import com.gvolpe.typed.examples.ReplyToPatternDemo.{MyMessage, MyResponse}
 import de.knutwalker.akka.typed._
 
 case class ReplyToPatternActor() extends TypedActor.Of[MyMessage] {

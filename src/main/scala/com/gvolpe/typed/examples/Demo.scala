@@ -1,15 +1,15 @@
-package com.gvolpe.typed
+package com.gvolpe.typed.examples
 
-import akka.actor._
-import com.gvolpe.typed.actor.SimpleAkkaActor.{SimpleMessage, SimpleMessageOne, SimpleMessageTwo}
-import de.knutwalker.akka.typed.{ActorRef, _}
-import com.gvolpe.typed.actor._
-import com.gvolpe.typed.actor.SimpleTypedActor._
-import com.gvolpe.typed.actor.StrictTypedActor.StrictOne
-import com.gvolpe.typed.actor.UnionTypedActor._
+import akka.actor.ActorSystem
+import com.gvolpe.typed.examples.actor.SimpleAkkaActor.{SimpleMessage, SimpleMessageOne, SimpleMessageTwo}
+import com.gvolpe.typed.examples.actor.SimpleTypedActor.{Bar, Foo}
+import com.gvolpe.typed.examples.actor.StrictTypedActor.StrictOne
+import com.gvolpe.typed.examples.actor.UnionTypedActor.{SampleOne, SampleThree, SampleTwo}
+import com.gvolpe.typed.examples.actor._
+import de.knutwalker.akka.typed._
 
-import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
+import scala.concurrent.ExecutionContext.Implicits.global
 
 object Demo extends App {
 
@@ -17,7 +17,7 @@ object Demo extends App {
 
   case object SomeOtherMessage
 
-  val actor = SimpleTypedActor.props
+  val actor = ActorOf(SimpleTypedActor.props, name = "simple-typed-actor")
 
   actor ! Foo("Hey you be strict!")
   actor ! Bar("What's the craic?")
@@ -25,7 +25,7 @@ object Demo extends App {
   // You'll get a compilation error!
   // actor ! SomeOtherMessage
 
-  val unionActor = UnionTypedActor.props
+  val unionActor = ActorOf(UnionTypedActor.props)
 
   unionActor ! SampleOne(5)
   unionActor ! SampleTwo("Hey!")
@@ -43,7 +43,7 @@ object Demo extends App {
   // You'll get a compilation error!
   // sampleTwoOnlyActor ! SampleOne(1)
 
-  val simpleAkkaActor: UntypedActorRef = SimpleAkkaActor.props
+  val simpleAkkaActor: UntypedActorRef = system.actorOf(SimpleAkkaActor.props)
 
   simpleAkkaActor ! SimpleMessageOne("Hey!")
   simpleAkkaActor ! "Whatever, it's untyped!"
@@ -55,14 +55,14 @@ object Demo extends App {
   // You'll get a compilation error!
   // simpleAkkaActorTyped ! "Now it will fail!"
 
-  val strictTypedActor = StrictTypedActor.props
+  val strictTypedActor = ActorOf(StrictTypedActor.props, name = "StrictTypedActor")
 
   strictTypedActor ! StrictOne
 
   // You'll get a compilation error!
   // strictTypedActor ! "Whatever"
 
-  val strictUnionTypedActor = StrictUnionTypedActor.props
+  val strictUnionTypedActor = ActorOf(StrictUnionTypedActor.props)
 
   strictUnionTypedActor ! StrictUnionTypedActor.Foo()
 
